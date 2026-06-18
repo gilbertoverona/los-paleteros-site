@@ -216,27 +216,25 @@ if (h) {
 // <svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="1.8" width="20" height="20"><path d="M10.29 3.86L1.82 18a2 2 0 001.71 3h16.94a2 2 0 001.71-3L13.71 3.86a2 2 0 00-3.42 0z"/><line x1="12" y1="9" x2="12" y2="13"/><line x1="12" y1="17" x2="12.01" y2="17"/></svg> SUBSTITUIR: cole aqui a sua chave do Web3Forms (web3forms.com → Get Access Key)
 const WEB3FORMS_KEY = '635ea0ea-a4d9-4778-8c11-81dea89a6617';
 
-// ── HubSpot (CRM) ──
-// Portal ID já preenchido. Cole o GUID do formulário criado no HubSpot
-// (Marketing → Forms → criar form com os campos Email, First name, Phone, City, State, Message).
-// Enquanto o GUID estiver vazio, o envio ao HubSpot fica desativado (não afeta o site).
-const HUBSPOT_PORTAL_ID = '51626538';
-const HUBSPOT_FORM_GUID = '6b841681-6dc1-4387-9b7c-f86875e4bc53';
-
+// ── HubSpot (CRM) via Netlify Function ──
+// Envia o lead direto para o CRM do HubSpot pela função /.netlify/functions/hubspot-lead
+// (o token fica seguro no Netlify, nunca no site). Captura TODOS os campos.
 function enviarHubspot(formName, payload, parts){
-  if (!HUBSPOT_FORM_GUID) return;
   const get = k => (payload[k] || '').trim();
-  const fields = [];
-  const email = get('E-mail'); if (email) fields.push({ name: 'email', value: email });
-  const nome  = get('Nome') || get('Nome / Razao social'); if (nome) fields.push({ name: 'firstname', value: nome });
-  const tel   = get('Telefone'); if (tel) fields.push({ name: 'phone', value: tel });
-  const cid   = get('Cidade'); if (cid) fields.push({ name: 'city', value: cid });
-  const est   = get('Estado'); if (est) fields.push({ name: 'state', value: est });
-  fields.push({ name: 'message', value: 'Modalidade: ' + formName + '\n' + parts.join('\n') });
-  fetch('https://api.hsforms.com/submissions/v3/integration/submit/' + HUBSPOT_PORTAL_ID + '/' + HUBSPOT_FORM_GUID, {
+  const data = {
+    formName: formName,
+    email:    get('E-mail'),
+    nome:     get('Nome') || get('Nome / Razao social'),
+    telefone: get('Telefone'),
+    cidade:   get('Cidade'),
+    estado:   get('Estado'),
+    detalhes: parts.join('\n')
+  };
+  if (!data.email) return;
+  fetch('/.netlify/functions/hubspot-lead', {
     method: 'POST',
     headers: { 'Content-Type': 'application/json' },
-    body: JSON.stringify({ fields: fields, context: { pageUri: location.href, pageName: document.title } })
+    body: JSON.stringify(data)
   }).catch(function(){});
 }
 
