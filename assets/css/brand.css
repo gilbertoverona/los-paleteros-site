@@ -1,0 +1,7 @@
+/* brand.css - nucleo de design compartilhado por todas as paginas */
+@import url("../fonts/fonts.css");
+
+.sig{font-family:'Sant Elia Script',cursive!important;text-transform:none!important;font-weight:400;color:var(--yw);font-size:.82em;letter-spacing:.01em}
+html{scroll-behavior:smooth}
+/* === refinamento mobile: fontes/imagens === */
+img{height:auto}
