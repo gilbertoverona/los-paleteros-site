@@ -17,6 +17,7 @@
   gtag('js', new Date());
   gtag('config', 'G-9R4057CDQT');
 </script>
+<script>document.addEventListener("click",function(e){var a=e.target.closest&&e.target.closest('a[href*="ifood.com.br"]');if(a&&typeof gtag==="function"){gtag("event","click_pedir_ifood",{link_url:a.href,page:location.pathname});}});</script>
 </head>
 <body>
 
@@ -286,6 +287,9 @@ async function enviar(form){
 
   // Envia também para o HubSpot (cria/atualiza o Contato). Best-effort, não bloqueia o envio.
   enviarHubspot(formName, payload, parts);
+
+  // GA4: lead de parceria
+  if (typeof gtag === 'function') { gtag('event', 'generate_lead', { lead_type: 'parceria', modalidade: formName }); }
 
   // UI: desabilita botão + estado de envio
   const btn = form.querySelector('.form-submit');
