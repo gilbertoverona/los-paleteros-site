@@ -157,6 +157,12 @@
       </div>
       <p class="onde-sub">Encontre o ponto de venda Los Paleteros mais próximo. Lojas, quiosques e parceiros em todo o Brasil.</p>
     </div>
+    <div class="mapa-busca">
+      <svg viewBox="0 0 24 24" width="18" height="18" fill="none" stroke="currentColor" stroke-width="2"><circle cx="11" cy="11" r="7"/><line x1="21" y1="21" x2="16.65" y2="16.65"/></svg>
+      <input id="mapa-q" type="search" placeholder="Buscar por cidade ou CEP…" autocomplete="off">
+      <button type="button" id="mapa-clear" aria-label="Limpar busca">×</button>
+      <span id="mapa-count"></span>
+    </div>
     <div id="mapa-lojas"></div>
   </div>
 </section>
@@ -662,23 +668,22 @@ const PONTOS_FOZ=[
     }
   });
 
+  var TODOS = [];
+  function lpNorm(x){ return (x||'').toString().toLowerCase().normalize('NFD').replace(/[̀-ͯ]/g,''); }
+
   PONTOS.forEach(function(p){
-    const gmaps = 'https://www.google.com/maps/dir/?api=1&destination=' + p.lat + ',' + p.lng;
-    const icon = p.nome.indexOf('Los Paleteros') === 0 ? greenPin : pinIcon;
-    const m = L.marker([p.lat, p.lng], {icon: icon}).bindPopup(
+    var gmaps = 'https://www.google.com/maps/dir/?api=1&destination=' + p.lat + ',' + p.lng;
+    var icon = p.nome.indexOf('Los Paleteros') === 0 ? greenPin : pinIcon;
+    var m = L.marker([p.lat, p.lng], {icon: icon}).bindPopup(
       '<div class="lp-pop-nome">' + p.nome + '</div>' +
       '<div class="lp-pop-end">' + p.endereco + '</div>' +
-      '<a class="lp-pop-link" href="' + gmaps + '" target="_blank" rel="noopener">Como chegar →</a>'
+      '<a class="lp-pop-link" href="' + gmaps + '" target="_blank" rel="noopener">Como chegar &rarr;</a>'
     );
     cluster.addLayer(m);
+    TODOS.push({ m: m, t: lpNorm(p.nome + ' ' + p.endereco) });
   });
 
-  mapa.addLayer(cluster);
-  mapa.fitBounds(cluster.getBounds(), {padding: [50, 50]});
-
-  // --- Pontos de venda de Foz do Iguaçu (coordenadas fixas) ---
-  (function(){
-    if (typeof PONTOS_FOZ === 'undefined' || !PONTOS_FOZ.length) return;
+  if (typeof PONTOS_FOZ !== 'undefined' && PONTOS_FOZ.length) {
     PONTOS_FOZ.forEach(function(p){
       var dir = 'https://www.google.com/maps/dir/?api=1&destination=' + encodeURIComponent(p.endereco);
       var m = L.marker([p.lat, p.lng], {icon: pinIcon}).bindPopup(
@@ -686,8 +691,42 @@ const PONTOS_FOZ=[
         '<div class="lp-pop-end">' + p.endereco + '</div>' +
         '<a class="lp-pop-link" href="' + dir + '" target="_blank" rel="noopener">Como chegar &rarr;</a>');
       cluster.addLayer(m);
+      TODOS.push({ m: m, t: lpNorm(p.nome + ' ' + p.endereco) });
     });
-    mapa.fitBounds(cluster.getBounds(), {padding: [50, 50]});
+  }
+
+  mapa.addLayer(cluster);
+  mapa.fitBounds(cluster.getBounds(), {padding: [50, 50]});
+
+  // --- Busca por cidade ou CEP ---
+  (function(){
+    var elQ = document.getElementById('mapa-q');
+    if (!elQ) return;
+    var elCount = document.getElementById('mapa-count');
+    var elClear = document.getElementById('mapa-clear');
+    function aplicar(termo){
+      var q = lpNorm(termo), vis = [];
+      cluster.clearLayers();
+      TODOS.forEach(function(it){
+        if (!q || it.t.indexOf(q) !== -1) { cluster.addLayer(it.m); vis.push(it.m); }
+      });
+      if (elCount) elCount.textContent = q ? (vis.length + (vis.length === 1 ? ' ponto' : ' pontos')) : '';
+      if (vis.length) { mapa.fitBounds(L.featureGroup(vis).getBounds(), {padding:[50,50]}); }
+    }
+    function buscar(termo){
+      var cep = (termo||'').replace(/\D/g,'');
+      if (cep.length === 8) {
+        if (elCount) elCount.textContent = 'buscando CEP…';
+        fetch('https://viacep.com.br/ws/' + cep + '/json/')
+          .then(function(r){ return r.json(); })
+          .then(function(d){ aplicar(d && !d.erro && d.localidade ? d.localidade : termo); })
+          .catch(function(){ aplicar(termo); });
+      } else { aplicar(termo); }
+    }
+    var deb;
+    elQ.addEventListener('input', function(){ clearTimeout(deb); var v = elQ.value; deb = setTimeout(function(){ buscar(v); }, 350); });
+    elQ.addEventListener('keydown', function(e){ if (e.key === 'Enter'){ e.preventDefault(); clearTimeout(deb); buscar(elQ.value); } });
+    if (elClear) elClear.addEventListener('click', function(){ elQ.value=''; aplicar(''); elQ.focus(); });
   })();
 
   // habilita zoom por scroll só após clique (evita travar o scroll da página)
