@@ -393,10 +393,10 @@ a.mc{text-decoration:none}
 @media(max-width:1024px){.midia-grid{grid-template-columns:repeat(2,1fr)}}
 @media(max-width:560px){.midia-grid{grid-template-columns:1fr}}
 
-.mapa-busca{display:flex;align-items:center;gap:.55rem;max-width:1240px;margin:0 auto 1rem;background:rgba(255,255,255,.06);border:1px solid rgba(255,255,255,.14);border-radius:12px;padding:.7rem 1rem}
-.mapa-busca svg{color:rgba(255,255,255,.5);flex-shrink:0}
-.mapa-busca input{flex:1;background:none;border:0;outline:none;color:#fff;font-family:var(--f);font-size:1rem;min-width:0}
+.mapa-busca{display:flex;align-items:center;gap:.8rem;max-width:1240px;margin:0 auto 1.2rem;background:rgba(255,255,255,.06);border:1px solid rgba(255,255,255,.14);border-radius:14px;padding:1.45rem 1.4rem}
+.mapa-busca svg{color:rgba(255,255,255,.5);flex-shrink:0;width:28px;height:28px}
+.mapa-busca input{flex:1;background:none;border:0;outline:none;color:#fff;font-family:var(--f);font-size:1.3rem;min-width:0}
 .mapa-busca input::placeholder{color:rgba(255,255,255,.45)}
-.mapa-busca #mapa-clear{background:none;border:0;color:rgba(255,255,255,.55);font-size:1.5rem;line-height:1;cursor:pointer;padding:0 .25rem}
+.mapa-busca #mapa-clear{background:none;border:0;color:rgba(255,255,255,.55);font-size:1.9rem;line-height:1;cursor:pointer;padding:0 .35rem}
 .mapa-busca #mapa-clear:hover{color:#fff}
-.mapa-busca #mapa-count{font-size:.85rem;color:var(--yw);white-space:nowrap;font-weight:700}
+.mapa-busca #mapa-count{font-size:1.05rem;color:var(--yw);white-space:nowrap;font-weight:700}
