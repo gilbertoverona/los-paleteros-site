@@ -5,3 +5,22 @@
 html{scroll-behavior:smooth}
 /* === refinamento mobile: fontes/imagens === */
 img{height:auto}
+
+/* === Banner de cookies (LGPD) === */
+.lp-cookie{position:fixed;left:0;right:0;bottom:0;z-index:9999;background:#231F20;color:#fff;border-top:3px solid #ED1651;transform:translateY(115%);transition:transform .35s ease;font-family:'Avenir Next',system-ui,sans-serif;box-shadow:0 -8px 30px rgba(0,0,0,.35)}
+.lp-cookie.show{transform:none}
+.lp-cookie-in{max-width:1120px;margin:0 auto;display:flex;align-items:center;gap:1rem 2rem;flex-wrap:wrap;justify-content:center;padding:1.05rem 1.4rem}
+.lp-cookie-in p{margin:0;font-size:.92rem;line-height:1.45;flex:1;min-width:240px;color:rgba(255,255,255,.88)}
+.lp-cookie-in a{color:#FBA918;text-decoration:underline}
+.lp-cookie-bts{display:flex;gap:.7rem;flex-shrink:0}
+.lp-cookie-bts button{font-family:inherit;font-weight:700;font-size:.9rem;border:0;border-radius:999px;padding:.7rem 1.6rem;cursor:pointer;transition:background .2s,border-color .2s}
+.lp-ck-no{background:transparent;color:#fff;border:1.5px solid rgba(255,255,255,.4)}
+.lp-ck-no:hover{border-color:#fff}
+.lp-ck-yes{background:#ED1651;color:#fff}
+.lp-ck-yes:hover{background:#c9123f}
+@media(max-width:620px){.lp-cookie-in{flex-direction:column;text-align:center}.lp-cookie-bts{width:100%;justify-content:center}}
+
+/* .ft-legal genérico (rodapés que não definem o próprio) */
+.ft-legal{display:flex;flex-wrap:wrap;justify-content:center;gap:.6rem 1.3rem;margin-top:1rem}
+.ft-legal a{font-size:.72rem;color:rgba(255,255,255,.34);text-transform:uppercase;letter-spacing:.04em;text-decoration:none;transition:color .2s}
+.ft-legal a:hover{color:#fff}
