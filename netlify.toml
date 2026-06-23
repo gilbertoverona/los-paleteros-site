@@ -5,15 +5,29 @@
 [functions]
   directory = "netlify/functions"
 
+# CSS e JS mudam com frequência → sempre revalidar (evita servir versão antiga em cache)
 [[headers]]
-  for = "/assets/*"
+  for = "/assets/css/*"
   [headers.values]
-    Cache-Control = "public, max-age=31536000, immutable"
+    Cache-Control = "public, max-age=0, must-revalidate"
+[[headers]]
+  for = "/assets/js/*"
+  [headers.values]
+    Cache-Control = "public, max-age=0, must-revalidate"
+# Fontes, imagens e vídeos raramente mudam → cache longo
 [[headers]]
   for = "/assets/fonts/*"
   [headers.values]
     Cache-Control = "public, max-age=31536000, immutable"
     Access-Control-Allow-Origin = "*"
+[[headers]]
+  for = "/assets/img/*"
+  [headers.values]
+    Cache-Control = "public, max-age=31536000, immutable"
+[[headers]]
+  for = "/assets/video/*"
+  [headers.values]
+    Cache-Control = "public, max-age=31536000, immutable"
 [[headers]]
   for = "/*"
   [headers.values]
