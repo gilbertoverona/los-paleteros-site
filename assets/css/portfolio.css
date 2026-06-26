@@ -124,3 +124,53 @@ nav{position:relative}
   .nav-links a,.top-cats>a{display:block!important;width:100%;padding:.9rem 6vw!important;font-size:1.05rem!important;letter-spacing:.04em!important;border-bottom:1px solid rgba(255,255,255,.06)}
   .nav-links .nav-cta,.top-cats .nav-cta-pf{display:none!important}
 }
+
+/* ===== TEMA MEIO-TERMO (light) — override ===== */
+:root{--cream:#FAF7F4;--ink:#231F20;--mut:#6a655f;--line:#e7e2da}
+body{background:var(--cream);color:var(--ink)}
+::-webkit-scrollbar-track{background:var(--cream)}
+nav{background:rgba(255,255,255,.94)!important;border-bottom:1px solid var(--line)}
+.nav-back{color:var(--mut)}
+.nav-back:hover{color:var(--ink)}
+.top-cats a{color:#4a4641}
+.top-cats a:hover{color:var(--ink);background:rgba(35,31,32,.05)}
+.hb span{background:var(--ink)}
+.hero{background:#fff}
+.hero::before{color:rgba(35,31,32,.035)}
+.hero-title{color:var(--ink)}
+.hero-title span{color:var(--mg)}
+.hero-sub{color:var(--mut)}
+.hero-stats{border-color:var(--line)}
+.hs{border-right-color:var(--line)}
+.hs-n{color:var(--mg)}
+.hs-l{color:#9a948c}
+.cns{background:rgba(255,255,255,.96);border-bottom:1px solid var(--line)}
+.cnl{color:#8a857e}
+.cnl:hover,.cnl.active{color:var(--ink)}
+.cat-hd{border-bottom-color:var(--line)}
+.cat-title{color:var(--ink)}
+.cat-desc{color:var(--mut)}
+.cat-weight{color:#9a948c}
+.fc{background:#fff;border-color:var(--line);box-shadow:0 1px 2px rgba(35,31,32,.04)}
+.fc:hover{box-shadow:0 16px 40px rgba(35,31,32,.12),0 0 0 1px var(--ca)}
+.fc-name{color:var(--ink)}
+.fc-desc{color:var(--mut)}
+footer{background:var(--ink);border-top-color:rgba(255,255,255,.08)}
+@media(max-width:768px){
+  .nav-links,.top-cats{background:rgba(255,255,255,.98)!important;border-bottom:2px solid var(--mg)}
+  .nav-links a,.top-cats>a{color:var(--ink);border-bottom:1px solid var(--line)}
+}
+
+/* Fundo claro próprio por categoria (sobrepõe o inline escuro) */
+#especiais{background:#fdf2f5!important}   /* magenta suave */
+#standard{background:#eef4fb!important}     /* azul suave */
+#zero{background:#eef8f1!important}         /* verde suave */
+#frutados{background:#fdf6e8!important}     /* âmbar suave */
+#kids{background:#fdf2ea!important}         /* laranja suave */
+/* Reforco de legibilidade sobre os tons claros */
+.cat-title{color:var(--ink)!important}
+.cat-desc{color:#5a5650!important}
+.cat-hd{border-bottom-color:rgba(35,31,32,.1)!important}
+
+/* Faixa final (magenta): título em branco */
+.ftcta h2{color:#fff!important}

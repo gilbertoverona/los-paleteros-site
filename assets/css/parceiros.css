@@ -119,3 +119,46 @@ nav{position:relative}
   .nav-links a,.top-cats>a{display:block!important;width:100%;padding:.9rem 6vw!important;font-size:1.05rem!important;letter-spacing:.04em!important;border-bottom:1px solid rgba(255,255,255,.06)}
   .nav-links .nav-cta,.top-cats .nav-cta-pf{display:none!important}
 }
+
+/* ===== TEMA MEIO-TERMO (light) — override ===== */
+:root{--mg:#ED1651;--yw:#FBA918;--bl:#005BA4;--gb:#009A4A;--ink:#231F20;--cream:#FAF7F4;--mut:#6a655f;--line:#e7e2da}
+body{background:var(--cream);color:var(--ink)}
+::-webkit-scrollbar-track{background:var(--cream)}
+nav{background:rgba(255,255,255,.94)!important;border-bottom:1px solid var(--line)}
+.nav-back{color:var(--mut)}
+.nav-back:hover{color:var(--ink)}
+.top-cats a{color:#4a4641}
+.top-cats a:hover{color:var(--ink)}
+.hb span{background:var(--ink)}
+/* HERO claro */
+.hero{background:#fff}
+.hero::before{color:rgba(35,31,32,.035)}
+.hero h1{color:var(--ink)}
+.hero h1 span{color:var(--mg)}
+.hero p{color:var(--mut)}
+/* TABS claras */
+.tab-btn{background:#fff;border-color:var(--line);color:var(--mut)}
+.tab-btn:hover{color:var(--ink);background:#fff}
+/* PANELS */
+.p-title{color:var(--ink)}
+.p-desc{color:var(--mut)}
+.p-feat-txt strong{color:var(--ink)}
+.p-feat-txt span{color:var(--mut)}
+/* FORM claro */
+.form-card{background:#fff;border-color:var(--line);box-shadow:0 2px 10px rgba(35,31,32,.05)}
+.form-card h3{color:var(--ink)}
+.form-card .fc-sub{color:var(--mut)}
+.field label{color:#4a4641}
+.field input,.field select,.field textarea{background:#fff;border-color:var(--line);color:var(--ink)}
+.field input::placeholder,.field textarea::placeholder{color:#9a948c}
+.field input:focus,.field select:focus,.field textarea:focus{background:#fff;border-color:var(--ta)}
+.field select{background-image:url("data:image/svg+xml,%3Csvg xmlns='http://www.w3.org/2000/svg' width='12' height='8' viewBox='0 0 12 8'%3E%3Cpath fill='%23231f2099' d='M6 8L0 0h12z'/%3E%3C/svg%3E")}
+.field select option{background:#fff;color:var(--ink)}
+.form-note{color:#8a857e}
+/* RODAPÉ — âncora ink */
+footer{background:var(--ink);border-top-color:rgba(255,255,255,.08)}
+/* Mobile claro */
+@media(max-width:768px){
+  .nav-links,.top-cats{background:rgba(255,255,255,.98)!important;border-bottom:2px solid var(--mg)}
+  .nav-links a,.top-cats>a{color:var(--ink);border-bottom:1px solid var(--line)}
+}

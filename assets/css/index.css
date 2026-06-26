@@ -400,3 +400,113 @@ a.mc{text-decoration:none}
 .mapa-busca #mapa-clear{background:none;border:0;color:rgba(255,255,255,.55);font-size:1.9rem;line-height:1;cursor:pointer;padding:0 .35rem}
 .mapa-busca #mapa-clear:hover{color:#fff}
 .mapa-busca #mapa-count{font-size:1.05rem;color:var(--yw);white-space:nowrap;font-weight:700}
+
+/* ============================================================
+   TEMA MEIO-TERMO (light + paleta oficial) — camada de override
+   Não altera HTML/estrutura: só cor, fundo, respiro e peso.
+   Âncoras vibrantes mantidas: ticker (magenta), manifesto (magenta),
+   instagram (âmbar) e rodapé (ink escuro).
+   ============================================================ */
+:root{--mg:#ED1651;--yw:#FBA918;--bl:#005BA4;--gb:#009A4A;--ink:#231F20;--cream:#FAF7F4;--mut:#6a655f;--line:#e7e2da}
+body{background:var(--cream);color:var(--ink)}
+::-webkit-scrollbar-track{background:var(--cream)}
+
+/* NAV clara */
+nav{background:rgba(255,255,255,.94)!important;border-bottom:1px solid var(--line)}
+.nav-links a{color:var(--mut)}
+.nav-links a:hover{color:var(--ink)}
+.hb span{background:var(--ink)}
+
+/* HERO claro */
+.hero{background:#fff}
+.hero::before{display:none}
+.hero-ey{color:var(--mg)}
+.hero-title{color:var(--ink)}
+.hero-title .l2{color:var(--mg)}
+.hero-sub{color:var(--mut)}
+.hero-scroll{color:#b9b3aa}
+.hero-scroll::after{background:#ddd6cc}
+.btn-s{color:var(--ink);border-color:var(--mg);background:transparent}
+.btn-s:hover{color:#fff;background:var(--mg);border-color:var(--mg)}
+
+/* MANIFESTO (about) — âncora magenta */
+.about{background:var(--mg)}
+
+/* FEATURES — claro */
+.features{background:#fff}
+.feat{border-color:var(--line)}
+.feat-num{color:#efe7dd}
+.feat-title{color:var(--ink)}
+.feat-text{color:var(--mut)}
+
+/* PARTNERS — claro, cartões brancos */
+.partners{background:var(--cream)}
+.partners .ghost{color:var(--ink)}
+.par-card{background:#fff;border-color:var(--line);box-shadow:0 1px 2px rgba(35,31,32,.04)}
+.par-card:hover{background:#fff;border-color:var(--mg)}
+.par-title{color:var(--ink)}
+.par-desc{color:var(--mut)}
+
+/* INSTAGRAM — âncora âmbar (mantida) já usa --yw oficial */
+
+/* LINHA DO TEMPO — clara, cartões brancos */
+.timeline-sec{background:var(--cream)}
+.tl-title{color:var(--ink)}
+.tl-label{color:var(--mg)}
+.tl-item{background:#fff;border-color:var(--line);box-shadow:0 1px 2px rgba(35,31,32,.04)}
+.tl-item:hover{background:#fff;border-color:var(--mg)}
+.tl-year{color:var(--mg)}
+.tl-text{color:#4a4641}
+.tl-text strong{color:var(--ink)}
+.tl-item.tl-now{background:#fdeaf0;border-color:var(--mg)}
+
+/* NA MÍDIA — clara, cartões brancos */
+.midia{background:var(--cream)}
+.midia .ghost{color:var(--ink)}
+.mc{background:#fff;border-color:var(--line);box-shadow:0 1px 2px rgba(35,31,32,.04)}
+.mc:hover{background:#fff;border-color:var(--mg)}
+.mc-q{color:#efe7dd}
+.mc-pub{color:var(--bl)}
+.mc-tt{color:var(--ink)}
+.mc-sub{color:var(--mut)}
+.mc-yr{color:#9a948c}
+.mc-link{color:var(--mg)}
+.midia-note{color:#8a857e}
+
+/* ONDE ENCONTRAR — clara */
+.onde{background:var(--cream)}
+.onde .ghost{color:rgba(35,31,32,.04)}
+.onde-hd p.onde-sub{color:var(--mut)}
+#mapa-lojas{border:1px solid var(--line);box-shadow:0 18px 50px rgba(35,31,32,.12);background:#e8e4dd}
+.mapa-busca{background:#fff;border:1px solid var(--line)}
+.mapa-busca svg{color:#9a948c}
+.mapa-busca input{color:var(--ink)}
+.mapa-busca input::placeholder{color:#9a948c}
+.mapa-busca #mapa-clear{color:#9a948c}
+.mapa-busca #mapa-clear:hover{color:var(--ink)}
+.mapa-busca #mapa-count{color:var(--mg)}
+
+/* RODAPÉ — âncora ink escuro */
+footer{background:var(--ink);border-top-color:rgba(255,255,255,.08)}
+
+/* Rótulos/títulos de seção */
+.sec-label{color:var(--mg)}
+.sec-title{color:var(--ink)}
+
+/* Mobile: hero e menu claros */
+@media(max-width:768px){
+  .hero{background:#fff}
+  .hero-ey{color:var(--mg)}
+  .hero-title{color:var(--ink)}
+  .hero-sub{color:var(--mut)}
+  .btn-s{color:var(--ink);border-color:var(--mg);background:transparent}
+  .btn-s:hover{background:var(--mg);color:#fff}
+  .nav-links,.top-cats{background:rgba(255,255,255,.98)!important;border-bottom:2px solid var(--mg)}
+  .nav-links a,.top-cats>a{color:var(--ink);border-bottom:1px solid var(--line)}
+}
+
+/* Correção de contraste: título da âncora magenta em branco; realces âmbar->magenta */
+.sec-label{color:var(--mg)!important}
+.about .sec-title{color:#fff!important}
+.about .sec-label{color:rgba(255,255,255,.85)!important}
+.feat-title span,.sec-title span{color:var(--mg)!important}
